@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  @apply bg-[#0F1117] text-slate-200 antialiased min-h-screen overflow-x-hidden;
+  /* Signature Dot Grid Background from the reference */
+  background-image: radial-gradient(#222632 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@layer components {
+  /* Premium Dashboard Card Style from the image */
+  .byte-card {
+    @apply bg-white rounded-[1.25rem] overflow-hidden shadow-2xl shadow-black/20 border border-slate-200/10 flex flex-col;
+  }
+  
+  .byte-card-header {
+    @apply bg-[#1B1F2B] p-5 text-white flex items-center justify-between border-b border-white/5;
+  }
+
+  .byte-card-content {
+    @apply p-6 bg-white text-[#1B1F2B];
+  }
+
+  .status-tag {
+    @apply px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border;
+  }
+
+  .status-stable { @apply bg-green-50 text-green-600 border-green-100; }
+  .status-attention { @apply bg-orange-50 text-orange-600 border-orange-100; }
+  .status-critical { @apply bg-red-50 text-red-600 border-red-100; }
+  .status-active { @apply bg-indigo-50 text-indigo-600 border-indigo-100; }
+
+  /* Interactive Elements */
+  .byte-button-primary {
+    @apply px-6 py-3 bg-[#3F51B5] hover:bg-[#303F9F] text-white rounded-xl font-bold transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2;
+  }
+
+  .byte-button-secondary {
+    @apply px-6 py-3 bg-slate-50 hover:bg-slate-100 text-[#1B1F2B] border border-slate-200 rounded-xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2;
+  }
+
+  .byte-input {
+    @apply w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#3F51B5] focus:ring-4 focus:ring-[#3F51B5]/10 transition-all text-[#1B1F2B] placeholder-slate-400 font-medium;
+  }
+
+  /* Custom Scrollbar for the Workspace */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-700/50 rounded-full hover:bg-slate-600 transition-colors;
+  }
+}
+
+/* Animations from the reference style */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-byte-slide {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
