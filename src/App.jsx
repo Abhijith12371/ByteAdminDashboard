@@ -28,8 +28,8 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0F1117] flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-white/5 border-t-indigo-500 rounded-full animate-spin" />
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-slate-200 border-t-indigo-500 rounded-full animate-spin" />
       </div>
     );
   }
@@ -65,12 +65,12 @@ function App() {
           <div className="space-y-10 animate-byte-slide">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
               <div>
-                <p className="text-indigo-400 font-bold text-xs uppercase tracking-[0.3em] mb-3">System Overview</p>
-                <h1 className="text-4xl font-black text-white tracking-tighter">Welcome Back,</h1>
-                <p className="text-slate-400 text-lg font-medium mt-1">Management Portal • {session.user.email}</p>
+                <p className="text-indigo-600 font-bold text-xs uppercase tracking-[0.3em] mb-3">System Overview</p>
+                <h1 className="text-4xl font-black text-slate-900 tracking-tighter">Welcome Back,</h1>
+                <p className="text-slate-500 text-lg font-medium mt-1">Management Portal • {session.user.email}</p>
               </div>
               <div className="flex gap-3">
-                 <button className="byte-button-secondary bg-white/5 border-white/10 text-white hover:bg-white/10">
+                 <button className="byte-button-secondary bg-white border-slate-200 text-slate-700 hover:bg-slate-50">
                    <Settings size={18} /> Settings
                  </button>
                  <button onClick={() => setActiveTab('upload')} className="byte-button-primary">
@@ -159,11 +159,11 @@ function App() {
     <div className="flex min-h-screen">
       {/* Sidebar - Inspired by "Byte" Sidebar style */}
       <aside 
-        className={`${isSidebarOpen ? 'w-72' : 'w-24'} bg-[#1B1F2B] border-r border-white/5 transition-all duration-500 flex flex-col z-20 overflow-hidden`}
+        className={`${isSidebarOpen ? 'w-72' : 'w-24'} bg-white border-r border-slate-200 transition-all duration-500 flex flex-col z-20 overflow-hidden`}
       >
         <div className="p-8 mb-8 flex items-center justify-between">
-          {isSidebarOpen && <span className="text-2xl font-black text-white tracking-tighter">Byte</span>}
-          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2.5 hover:bg-white/5 rounded-xl text-slate-400 transition-colors">
+          {isSidebarOpen && <span className="text-2xl font-black text-slate-900 tracking-tighter">Byte</span>}
+          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2.5 hover:bg-slate-100 rounded-xl text-slate-400 transition-colors">
             {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
@@ -176,10 +176,10 @@ function App() {
               className={`w-full flex items-center gap-4 px-4 py-4 rounded-xl transition-all relative group ${
                 activeTab === tab.id 
                   ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-500/20' 
-                  : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                  : 'text-slate-500 hover:bg-slate-50 hover:text-indigo-600'
               }`}
             >
-              <tab.icon size={20} className={activeTab === tab.id ? 'text-white' : 'text-slate-500 group-hover:text-indigo-400 transition-colors'} />
+              <tab.icon size={20} className={activeTab === tab.id ? 'text-white' : 'text-slate-400 group-hover:text-indigo-600 transition-colors'} />
               {isSidebarOpen && (
                 <div className="flex-1 flex items-center justify-between">
                   <span className="font-bold text-sm tracking-tight">{tab.label}</span>
@@ -193,21 +193,21 @@ function App() {
           ))}
         </nav>
 
-        <div className="p-6 border-t border-white/5 space-y-3">
+        <div className="p-6 border-t border-slate-100 space-y-3">
           {isSidebarOpen && (
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 mb-4">
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 mb-4">
               <div className="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-500/20">
                 {session.user.email[0].toUpperCase()}
               </div>
               <div className="overflow-hidden">
-                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Authenticated</p>
-                <p className="text-xs font-black text-white truncate">{session.user.email}</p>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Authenticated</p>
+                <p className="text-xs font-black text-slate-900 truncate">{session.user.email}</p>
               </div>
             </div>
           )}
           <button 
             onClick={handleSignOut}
-            className={`w-full flex items-center gap-3 p-4 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-all font-bold ${isSidebarOpen ? '' : 'justify-center'}`}
+            className={`w-full flex items-center gap-3 p-4 rounded-xl text-slate-500 hover:text-red-600 hover:bg-red-50 transition-all font-bold ${isSidebarOpen ? '' : 'justify-center'}`}
           >
             <LogOut size={20} />
             {isSidebarOpen && <span className="text-sm">Log Out System</span>}
@@ -218,20 +218,20 @@ function App() {
       {/* Main Content Workspace */}
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         {/* Top Header Breadcrumbs */}
-        <header className="h-20 bg-[#1B1F2B]/50 backdrop-blur-md border-b border-white/5 px-10 flex items-center justify-between shrink-0">
+        <header className="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 px-10 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest">
-            <span className="text-slate-500">System</span>
-            <ChevronRight size={14} className="text-slate-600" />
-            <span className="text-indigo-400">{activeTab === 'home' ? 'Dashboard' : activeTab.replace('-', ' ')}</span>
+            <span className="text-slate-400">System</span>
+            <ChevronRight size={14} className="text-slate-300" />
+            <span className="text-indigo-600">{activeTab === 'home' ? 'Dashboard' : activeTab.replace('-', ' ')}</span>
           </div>
           <div className="flex items-center gap-6">
             <div className="relative hidden md:block">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={16} />
-              <input type="text" placeholder="Global search..." className="bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-xs text-white outline-none focus:border-indigo-500/50 w-64" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+              <input type="text" placeholder="Global search..." className="bg-slate-50 border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-xs text-slate-900 outline-none focus:border-indigo-500/50 w-64" />
             </div>
-            <button className="relative p-2 text-slate-400 hover:text-white transition-colors">
+            <button className="relative p-2 text-slate-400 hover:text-slate-900 transition-colors">
               <Bell size={20} />
-              <div className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-[#1B1F2B]" />
+              <div className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
             </button>
           </div>
         </header>

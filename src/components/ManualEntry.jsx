@@ -52,12 +52,12 @@ const ManualEntry = ({ onComplete }) => {
     <div className="max-w-5xl mx-auto space-y-10 animate-byte-slide">
       <header className="flex justify-between items-end">
         <div>
-          <p className="text-indigo-400 font-bold text-xs uppercase tracking-[0.3em] mb-3">Data Acquisition</p>
-          <h2 className="text-4xl font-black text-white tracking-tighter">Manual Assessment Entry</h2>
+          <p className="text-indigo-600 font-bold text-xs uppercase tracking-[0.3em] mb-3">Data Acquisition</p>
+          <h2 className="text-4xl font-black text-slate-900 tracking-tighter">Manual Assessment Entry</h2>
         </div>
         <div className="flex gap-2">
           {[1, 2, 3, 4].map(s => (
-            <div key={s} className={`w-8 h-1.5 rounded-full transition-all duration-500 ${s <= step ? 'bg-indigo-500 shadow-lg shadow-indigo-500/50' : 'bg-white/5'}`} />
+            <div key={s} className={`w-8 h-1.5 rounded-full transition-all duration-500 ${s <= step ? 'bg-indigo-500 shadow-lg shadow-indigo-500/20' : 'bg-slate-200'}`} />
           ))}
         </div>
       </header>
@@ -175,14 +175,14 @@ const ManualEntry = ({ onComplete }) => {
 
           {step === 4 && (
             <div className="space-y-8 animate-byte-slide">
-              <div className="flex items-center justify-between p-6 bg-[#1B1F2B] rounded-2xl text-white">
+              <div className="flex items-center justify-between p-6 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center text-indigo-400">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-indigo-600 shadow-sm border border-slate-100">
                     <TableIcon size={24} />
                   </div>
                   <div>
                     <h4 className="text-lg font-black tracking-tight">{tableName}</h4>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{rows.length} Total Records Ready</p>
+                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{rows.length} Total Records Ready</p>
                   </div>
                 </div>
                 <span className="status-tag status-stable">Validation Passed</span>

@@ -104,18 +104,18 @@ const ExcelUpload = ({ onComplete }) => {
   return (
     <div className="max-w-5xl mx-auto space-y-10 animate-byte-slide">
       <header>
-        <p className="text-indigo-400 font-bold text-xs uppercase tracking-[0.3em] mb-3">Academic Module</p>
-        <h2 className="text-4xl font-black text-white tracking-tighter">Bulk Assessment Import</h2>
+        <p className="text-indigo-600 font-bold text-xs uppercase tracking-[0.3em] mb-3">Academic Module</p>
+        <h2 className="text-4xl font-black text-slate-900 tracking-tighter">Bulk Assessment Import</h2>
       </header>
 
       {!data ? (
-        <div className="byte-card border-dashed border-2 border-white/5 bg-[#1B1F2B] hover:border-indigo-500/50 transition-all group relative overflow-hidden h-[400px] flex items-center justify-center">
+        <div className="byte-card border-dashed border-2 border-slate-200 bg-slate-50 hover:border-indigo-500/50 transition-all group relative overflow-hidden h-[400px] flex items-center justify-center">
            <div className="text-center space-y-6 relative z-10">
-              <div className="w-20 h-20 bg-white/5 rounded-2xl flex items-center justify-center text-indigo-400 mx-auto group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-xl">
+              <div className="w-20 h-20 bg-white border border-slate-200 rounded-2xl flex items-center justify-center text-indigo-600 mx-auto group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-xl">
                 <Upload size={32} />
               </div>
               <div>
-                <p className="text-xl font-black text-white tracking-tight">Drop Assessment Spreadsheet</p>
+                <p className="text-xl font-black text-slate-900 tracking-tight">Drop Assessment Spreadsheet</p>
                 <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px] mt-2">XLSX, CSV, or XLS Formats Only</p>
               </div>
            </div>

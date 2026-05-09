@@ -70,20 +70,20 @@ const Forecasting = () => {
     <div className="space-y-10 animate-byte-slide pb-20">
       <header className="flex flex-col md:flex-row justify-between items-end gap-6">
         <div className="space-y-2">
-          <p className="text-indigo-400 font-bold text-xs uppercase tracking-[0.3em]">AI Predictive Engine</p>
-          <h2 className="text-5xl font-black text-white tracking-tighter">Sales Forecasting</h2>
+          <p className="text-indigo-600 font-bold text-xs uppercase tracking-[0.3em]">AI Predictive Engine</p>
+          <h2 className="text-5xl font-black text-slate-900 tracking-tighter">Sales Forecasting</h2>
         </div>
         
-        <div className="flex items-center gap-4 bg-white/5 p-2 rounded-2xl border border-white/10">
+        <div className="flex items-center gap-4 bg-slate-50 p-2 rounded-2xl border border-slate-200">
           <div className="pl-4 pr-2">
-            <MapPin size={18} className="text-indigo-400" />
+            <MapPin size={18} className="text-indigo-600" />
           </div>
           <select 
             value={selectedState} 
             onChange={(e) => setSelectedState(e.target.value)}
-            className="bg-transparent border-none text-white font-black uppercase tracking-widest text-[10px] outline-none min-w-[200px] cursor-pointer py-3 pr-8"
+            className="bg-transparent border-none text-slate-900 font-black uppercase tracking-widest text-[10px] outline-none min-w-[200px] cursor-pointer py-3 pr-8"
           >
-            {states.map(s => <option key={s} value={s} className="bg-[#1B1F2B]">{s}</option>)}
+            {states.map(s => <option key={s} value={s} className="bg-white text-slate-900">{s}</option>)}
           </select>
         </div>
       </header>
@@ -107,12 +107,12 @@ const Forecasting = () => {
             <div className="byte-card p-8">
               <div className="flex justify-between items-center mb-10">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
                     <TrendingUp size={20} className="text-white" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-black uppercase tracking-widest text-white">8-Week Sales Forecast</h3>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase">{selectedState} Market Projection</p>
+                    <h3 className="text-sm font-black uppercase tracking-widest text-slate-900">8-Week Sales Forecast</h3>
+                    <p className="text-[10px] text-slate-500 font-bold uppercase">{selectedState} Market Projection</p>
                   </div>
                 </div>
                 <div className="flex gap-6">
@@ -130,7 +130,7 @@ const Forecasting = () => {
               <div className="h-[400px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" vertical={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
                     <XAxis 
                       dataKey="name" 
                       stroke="#475569" 
@@ -210,18 +210,18 @@ const Forecasting = () => {
           {/* Sidebar Info */}
           <div className="xl:col-span-4 space-y-8">
              <div className="byte-card">
-               <div className="byte-card-header border-b border-white/5">
-                 <span className="text-sm font-black uppercase tracking-widest">Forecast Schedule</span>
-                 <Calendar size={16} className="text-indigo-400" />
+               <div className="byte-card-header border-b border-slate-100">
+                 <span className="text-sm font-black uppercase tracking-widest text-slate-900">Forecast Schedule</span>
+                 <Calendar size={16} className="text-indigo-600" />
                </div>
                <div className="byte-card-content p-0">
                  {data.forecast.map((item, i) => (
-                   <div key={i} className="flex items-center justify-between p-4 border-b border-white/5 hover:bg-white/5 transition-colors cursor-default">
+                   <div key={i} className="flex items-center justify-between p-4 border-b border-slate-50 hover:bg-slate-50 transition-colors cursor-default">
                      <div className="flex items-center gap-4">
                        <div className="text-[10px] font-black text-slate-500 uppercase">Week {i+1}</div>
-                       <div className="text-xs font-bold text-white">{item.Date}</div>
+                       <div className="text-xs font-bold text-slate-900">{item.Date}</div>
                      </div>
-                     <div className="text-sm font-black text-indigo-400">
+                     <div className="text-sm font-black text-indigo-600">
                        ${(item.Total / 1e6).toFixed(2)}M
                      </div>
                    </div>
@@ -229,14 +229,14 @@ const Forecasting = () => {
                </div>
              </div>
 
-             <div className="byte-card bg-[#1B1F2B] border-white/5 p-8 relative overflow-hidden">
+             <div className="byte-card bg-white border-slate-200 p-8 relative overflow-hidden shadow-xl shadow-slate-200/50">
                 <div className="relative z-10 space-y-6">
-                  <div className="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center border border-indigo-500/20">
-                    <BarChart3 size={24} className="text-indigo-400" />
+                  <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center border border-indigo-100">
+                    <BarChart3 size={24} className="text-indigo-600" />
                   </div>
                   <div className="space-y-2">
-                    <h4 className="text-xl font-black text-white tracking-tight">Intelligence Report</h4>
-                    <p className="text-xs text-slate-400 font-bold leading-relaxed">
+                    <h4 className="text-xl font-black text-slate-900 tracking-tight">Intelligence Report</h4>
+                    <p className="text-xs text-slate-500 font-bold leading-relaxed">
                       Download the comprehensive forecasting analysis including model hyperparameters and feature importance scores.
                     </p>
                   </div>
@@ -244,7 +244,7 @@ const Forecasting = () => {
                     GENERATE PDF <ChevronRight size={14} />
                   </button>
                 </div>
-                <div className="absolute -right-10 -bottom-10 opacity-5">
+                <div className="absolute -right-10 -bottom-10 opacity-[0.03] text-slate-900">
                    <TrendingUp size={200} />
                 </div>
              </div>
@@ -263,13 +263,13 @@ const Forecasting = () => {
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-[#1B1F2B] p-4 rounded-2xl border border-white/10 shadow-2xl animate-byte-slide">
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 border-b border-white/5 pb-2">{label}</p>
+      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xl animate-byte-slide">
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 border-b border-slate-100 pb-2">{label}</p>
         <div className="space-y-1">
           {payload.map((p, i) => p.value && (
             <div key={i} className="flex items-center justify-between gap-6">
               <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{p.name}</span>
-              <span className={`text-sm font-black ${p.name === 'actual' ? 'text-indigo-400' : 'text-fuchsia-400'}`}>
+              <span className={`text-sm font-black ${p.name === 'actual' ? 'text-indigo-600' : 'text-fuchsia-600'}`}>
                 ${(p.value / 1e6).toFixed(2)}M
               </span>
             </div>

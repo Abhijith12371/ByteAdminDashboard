@@ -6,27 +6,33 @@
 
 :root {
   font-family: 'Inter', sans-serif;
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --border-primary: #E2E8F0;
+  --indigo-primary: #3F51B5;
 }
 
 body {
-  @apply bg-[#0F1117] text-slate-200 antialiased min-h-screen overflow-x-hidden;
-  /* Signature Dot Grid Background from the reference */
-  background-image: radial-gradient(#222632 1px, transparent 1px);
+  @apply bg-[#F8FAFC] text-slate-900 antialiased min-h-screen overflow-x-hidden;
+  /* Signature Dot Grid Background - adjusted for light mode */
+  background-image: radial-gradient(#E2E8F0 1.5px, transparent 1.5px);
   background-size: 24px 24px;
 }
 
 @layer components {
-  /* Premium Dashboard Card Style from the image */
+  /* Premium Dashboard Card Style */
   .byte-card {
-    @apply bg-white rounded-[1.25rem] overflow-hidden shadow-2xl shadow-black/20 border border-slate-200/10 flex flex-col;
+    @apply bg-white rounded-[1.25rem] overflow-hidden shadow-sm border border-slate-200 flex flex-col transition-all duration-300;
   }
   
   .byte-card-header {
-    @apply bg-[#1B1F2B] p-5 text-white flex items-center justify-between border-b border-white/5;
+    @apply bg-slate-50/50 p-5 text-slate-900 flex items-center justify-between border-b border-slate-100;
   }
 
   .byte-card-content {
-    @apply p-6 bg-white text-[#1B1F2B];
+    @apply p-6 bg-white text-slate-700;
   }
 
   .status-tag {
@@ -40,15 +46,15 @@ body {
 
   /* Interactive Elements */
   .byte-button-primary {
-    @apply px-6 py-3 bg-[#3F51B5] hover:bg-[#303F9F] text-white rounded-xl font-bold transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2;
+    @apply px-6 py-3 bg-[#3F51B5] hover:bg-[#303F9F] text-white rounded-xl font-bold transition-all shadow-md active:scale-95 flex items-center justify-center gap-2;
   }
 
   .byte-button-secondary {
-    @apply px-6 py-3 bg-slate-50 hover:bg-slate-100 text-[#1B1F2B] border border-slate-200 rounded-xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2;
+    @apply px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl font-bold transition-all active:scale-95 flex items-center justify-center gap-2;
   }
 
   .byte-input {
-    @apply w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#3F51B5] focus:ring-4 focus:ring-[#3F51B5]/10 transition-all text-[#1B1F2B] placeholder-slate-400 font-medium;
+    @apply w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#3F51B5] focus:ring-4 focus:ring-[#3F51B5]/10 transition-all text-slate-900 placeholder-slate-400 font-medium;
   }
 
   /* Custom Scrollbar for the Workspace */
@@ -62,7 +68,7 @@ body {
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-700/50 rounded-full hover:bg-slate-600 transition-colors;
+    @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
   }
 }
 

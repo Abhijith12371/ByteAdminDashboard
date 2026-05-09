@@ -177,8 +177,8 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh] space-y-4">
-        <div className="w-10 h-10 border-4 border-white/5 border-t-indigo-500 rounded-full animate-spin" />
-        <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Synchronizing...</p>
+        <div className="w-10 h-10 border-4 border-slate-200 border-t-indigo-500 rounded-full animate-spin" />
+        <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Synchronizing...</p>
       </div>
     );
   }
@@ -191,14 +191,14 @@ const Dashboard = () => {
         <div className="flex items-center justify-between">
           <button 
             onClick={() => { setSelectedSource(null); setIsEditing(false); }}
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-all font-bold text-xs uppercase tracking-widest"
+            className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-all font-bold text-xs uppercase tracking-widest"
           >
             <ChevronLeft size={16} /> Return to Intelligence Hub
           </button>
           
           <div className="flex gap-2">
             {!isEditing ? (
-              <button onClick={() => setIsEditing(true)} className="byte-button-secondary bg-white/5 border-white/10 text-white text-xs py-2 px-4">
+              <button onClick={() => setIsEditing(true)} className="byte-button-secondary bg-white border-slate-200 text-slate-700 text-xs py-2 px-4">
                 <Edit3 size={14} /> Update Records
               </button>
             ) : (
@@ -235,15 +235,15 @@ const Dashboard = () => {
                     <Database size={16} />
                   </div>
                   <div>
-                    <h2 className="text-sm font-black uppercase tracking-widest">{selectedSource}</h2>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase mt-0.5">Section Detail View</p>
+                    <h2 className="text-sm font-black uppercase tracking-widest text-slate-900">{selectedSource}</h2>
+                    <p className="text-[10px] text-slate-500 font-bold uppercase mt-0.5">Section Detail View</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => setViewMode('grid')} className={`p-1.5 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-white'}`}>
+                  <button onClick={() => setViewMode('grid')} className={`p-1.5 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-indigo-50 text-indigo-600' : 'text-slate-400 hover:text-slate-600'}`}>
                     <Grid size={16} />
                   </button>
-                  <button onClick={() => setViewMode('list')} className={`p-1.5 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white/10 text-white' : 'text-slate-500 hover:text-white'}`}>
+                  <button onClick={() => setViewMode('list')} className={`p-1.5 rounded-lg transition-all ${viewMode === 'list' ? 'bg-indigo-50 text-indigo-600' : 'text-slate-400 hover:text-slate-600'}`}>
                     <List size={16} />
                   </button>
                 </div>
@@ -331,10 +331,10 @@ const Dashboard = () => {
 
             {!isEditing && viewMode === 'grid' && (
                <div className="byte-card">
-                 <div className="byte-card-header">
-                   <span className="text-sm font-black uppercase tracking-widest">Student Performance Roster</span>
-                   <button className="text-[10px] font-bold text-indigo-400 hover:text-white transition-colors">VIEW ALL HISTORY</button>
-                 </div>
+                  <div className="byte-card-header">
+                    <span className="text-sm font-black uppercase tracking-widest text-slate-900">Student Performance Roster</span>
+                    <button className="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 transition-colors">VIEW ALL HISTORY</button>
+                  </div>
                  <div className="byte-card-content p-0">
                    <DataTable data={editableData.slice(0, 10).map(r => r.data)} />
                  </div>
@@ -408,10 +408,10 @@ const Dashboard = () => {
     <div className="space-y-12 animate-byte-slide pb-20">
       <header className="flex flex-col md:flex-row justify-between items-center gap-8">
         <div>
-          <p className="text-indigo-400 font-bold text-xs uppercase tracking-[0.3em] mb-3">Intelligence Hub</p>
-          <h2 className="text-5xl font-black text-white tracking-tighter">Academic Data Library</h2>
+          <p className="text-indigo-600 font-bold text-xs uppercase tracking-[0.3em] mb-3">Intelligence Hub</p>
+          <h2 className="text-5xl font-black text-slate-900 tracking-tighter">Academic Data Library</h2>
         </div>
-        <button onClick={fetchData} className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all">
+        <button onClick={fetchData} className="w-14 h-14 bg-white border border-slate-200 rounded-2xl flex items-center justify-center text-slate-400 hover:text-slate-900 hover:bg-slate-50 transition-all shadow-sm">
           <RefreshCw size={24} />
         </button>
       </header>
@@ -429,17 +429,17 @@ const Dashboard = () => {
               <button
                 key={source}
                 onClick={() => setSelectedSource(source)}
-                className="byte-card group hover:scale-[1.02] transition-all duration-300 bg-[#1B1F2B] border-white/5"
+                className="byte-card group hover:scale-[1.02] transition-all duration-300 bg-white border-slate-200 shadow-xl shadow-slate-200/50"
               >
                 <div className="p-8 text-left space-y-6">
                   <div className="flex justify-between items-start">
-                    <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-lg">
+                    <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
                       <Database size={24} />
                     </div>
                     <span className="status-tag status-stable">Stable</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-black text-white tracking-tight truncate">{source}</h3>
+                    <h3 className="text-xl font-black text-slate-900 tracking-tight truncate">{source}</h3>
                     <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">{rows.length} RECORDS DETECTED</p>
                   </div>
                   <div className="flex items-center gap-2 text-[10px] font-black text-indigo-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all translate-x-2 group-hover:translate-x-0">
@@ -477,9 +477,9 @@ const StatCard = ({ icon, label, value, status }) => (
 const ByteTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-[#1B1F2B] p-4 rounded-xl border border-white/10 shadow-2xl animate-byte-slide">
+      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xl animate-byte-slide">
         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{label}</p>
-        <p className="text-xl font-black text-white">{payload[0].value}</p>
+        <p className="text-xl font-black text-slate-900">{payload[0].value}</p>
       </div>
     );
   }
