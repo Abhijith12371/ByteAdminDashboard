@@ -38,46 +38,76 @@ const ExcelUpload = ({ onComplete }) => {
 
   const smartProcess = (rows) => {
     if (rows.length < 2) return rows;
+
+    // 1. Identify the header area (often first 2-3 rows in these academic sheets)
     let headerRowIndex = 0;
     for (let i = 0; i < Math.min(rows.length, 5); i++) {
-      if (rows[i].filter(cell => cell).length > 2) {
+      if (rows[i] && rows[i].filter(c => c).length > 2) {
         headerRowIndex = i;
         break;
       }
     }
-    const headers = rows[headerRowIndex].map((h, i) => {
-      let label = String(h || '').trim();
-      if (!label) {
-        const parentHeader = rows[headerRowIndex - 1]?.[i];
-        label = parentHeader ? `${parentHeader}_${i}` : `Col_${i}`;
+
+    // 2. Handle Multi-row headers (e.g., Week 1 -> Score, Feedback)
+    const row1 = rows[headerRowIndex] || [];
+    const row2 = rows[headerRowIndex + 1] || [];
+    
+    let activeCategory = "";
+    const headers = [];
+    
+    // Check if row2 looks like sub-headers (contains words like Score, Feedback, etc.)
+    const row2IsSubHeader = row2.some(cell => 
+      String(cell).toLowerCase().includes('score') || 
+      String(cell).toLowerCase().includes('feedback')
+    );
+
+    const maxCols = Math.max(row1.length, row2.length);
+    
+    for (let i = 0; i < maxCols; i++) {
+      const cat = String(row1[i] || "").trim();
+      if (cat) activeCategory = cat;
+      
+      const sub = String(row2[i] || "").trim();
+      
+      if (row2IsSubHeader && sub) {
+        // If it's a sub-header, combine it with the active category unless it's the primary column
+        if (i === 0 || i === 1) headers.push(sub);
+        else headers.push(`${activeCategory} - ${sub}`);
+      } else {
+        headers.push(cat || sub || `Col_${i}`);
       }
-      return label;
-    });
+    }
+
+    // 3. Process Data with Fill-Down logic
     const dataRows = [];
-    let lastValues = {};
-    for (let i = headerRowIndex + 1; i < rows.length; i++) {
+    const lastValues = {};
+    const startIdx = row2IsSubHeader ? headerRowIndex + 2 : headerRowIndex + 1;
+
+    for (let i = startIdx; i < rows.length; i++) {
       const row = rows[i];
-      if (row.filter(cell => cell).length === 0) continue;
+      if (!row || row.length === 0) continue;
+      
       const obj = {};
+      let hasData = false;
+      
       headers.forEach((header, colIdx) => {
         let val = row[colIdx];
-        if (val === undefined || val === null || val === '') {
-          if (colIdx === 0 || colIdx === 1) val = lastValues[colIdx];
-        } else {
+        
+        // Fill-down for first two columns (usually Student Name / Category)
+        if ((colIdx === 0 || colIdx === 1) && (val === undefined || val === null || val === '')) {
+          val = lastValues[colIdx];
+        } else if (val !== undefined && val !== null && val !== '') {
           lastValues[colIdx] = val;
         }
+        
+        if (val !== undefined && val !== null && val !== '') hasData = true;
         obj[header] = val;
       });
-      dataRows.push(obj);
+      
+      if (hasData) dataRows.push(obj);
     }
-    return dataRows.map(row => {
-      const cleanRow = {};
-      Object.keys(row).forEach(key => {
-        if (!key.startsWith('Col_') && key !== 'undefined') cleanRow[key] = row[key];
-        else if (row[key] !== undefined) cleanRow[`Field_${key.split('_')[1]}`] = row[key];
-      });
-      return cleanRow;
-    });
+
+    return dataRows;
   };
 
   const handleSave = async () => {

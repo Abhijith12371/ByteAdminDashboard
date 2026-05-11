@@ -6,25 +6,54 @@ import ManualEntry from './components/ManualEntry';
 import ExcelUpload from './components/ExcelUpload';
 import Dashboard from './components/Dashboard';
 import Forecasting from './components/Forecasting';
+import SchoolSetup from './components/SchoolSetup';
 
 function App() {
   const [session, setSession] = useState(null);
   const [activeTab, setActiveTab] = useState('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [hasConfig, setHasConfig] = useState(false);
+  const [isNewUser, setIsNewUser] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      setLoading(false);
+      if (session) checkUserConfig(session.user.id);
+      else setLoading(false);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (session) checkUserConfig(session.user.id);
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  const checkUserConfig = async (userId) => {
+    try {
+      const { data, error } = await supabase
+        .from('dynamic_data')
+        .select('*')
+        .eq('source_name', '_school_config')
+        .eq('user_id', userId)
+        .single();
+
+      if (error && error.code !== 'PGRST116') throw error;
+      
+      if (!data) {
+        setIsNewUser(true);
+      } else {
+        setHasConfig(true);
+        setIsNewUser(false);
+      }
+    } catch (err) {
+      console.error('Config check error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -38,8 +67,14 @@ function App() {
     return <Auth />;
   }
 
+  if (isNewUser) {
+    return <SchoolSetup onComplete={() => { setIsNewUser(false); setHasConfig(true); }} />;
+  }
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
+    setIsNewUser(false);
+    setHasConfig(false);
   };
 
   const tabs = [
